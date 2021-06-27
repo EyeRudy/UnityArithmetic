@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public static class UnderGrand
+{ 
+    public static void UnderGrandMath(Transform fatherObject)
+    {
+        RaycastHit Hit;
+        int Ramsk = LayerMask.GetMask("Ground");
+        Vector3 Point_dir = fatherObject.transform.TransformDirection(Vector3.down);
+        if(Physics.Raycast(fatherObject.position,Point_dir,out Hit,50.0f,Ramsk))
+        {
+            Quaternion NextRot = Quaternion.LookRotation(Vector3.Cross(Hit.normal,
+                Vector3.Cross(fatherObject.forward, Hit.normal)), Hit.normal);
+            fatherObject.GetComponent<Rigidbody>().MoveRotation(Quaternion.Lerp(fatherObject.rotation, NextRot, 0.1f));
+
+
+        }
+    }
+}
