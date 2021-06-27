@@ -6,10 +6,10 @@ public static class UnderGrand
 { 
     public static void UnderGrandMath(Transform fatherObject)
     {
-        RaycastHit Hit;
-        int Ramsk = LayerMask.GetMask("Ground");
-        Vector3 Point_dir = fatherObject.transform.TransformDirection(Vector3.down);
-        if(Physics.Raycast(fatherObject.position,Point_dir,out Hit,50.0f,Ramsk))
+        RaycastHit Hit;//获取射线碰撞后的撞击顶点
+        int Ramsk = LayerMask.GetMask("Ground");//射线碰撞的层集
+        Vector3 Point_dir = fatherObject.transform.TransformDirection(Vector3.down);//获取物体垂直方向的世界坐标向量
+        if(Physics.Raycast(fatherObject.position,Point_dir,out Hit,50.0f,Ramsk))//判断射线时否碰撞到Ramsk层集
         {
             Quaternion NextRot = Quaternion.LookRotation(Vector3.Cross(Hit.normal,
                 Vector3.Cross(fatherObject.forward, Hit.normal)), Hit.normal);
